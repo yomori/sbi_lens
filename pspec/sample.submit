@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -t 12:00:00
+#SBATCH --partition=SPT3G
+#SBATCH --account=SPT3G
+#SBATCH --ntasks=512
+#SBATCH --job-name=porqueres
+
+eval "$(/lcrc/project/SPT3G/users/ac.yomori/scratch/testcobaya3/miniconda/bin/conda shell.bash hook)"
+conda deactivate
+conda activate /lcrc/project/SPT3G/users/ac.yomori/scratch/testcobaya3/envs/testenv
+
+export OMP_NUM_THREADS=2
+
+mpirun -n 512 python sample.py
+
